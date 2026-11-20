@@ -1,0 +1,24 @@
+# 1. CONFIDENCIALIDAD Y DATOS DEL CLIENTE
+*Privado*
+*Talleres_Martinez*
+*Jose_Martinez*
+*.db
+*.sqlite
+*.sqlite3
+resenas_brutas.csv
+
+# 2. SEGURIDAD Y CREDENCIALES (API KEYS)
+.env
+config_local.py
+*secret*
+*api_key*
+
+# 3. ARCHIVOS DEL SISTEMA Y HERRAMIENTAS
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.DS_Store
+Thumbs.db
