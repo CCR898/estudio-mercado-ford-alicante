@@ -58,6 +58,6 @@ Este proyecto combina investigación de mercado tradicional (informes **ANFAC**,
 
 1. **Clona el repositorio:**
    ```bash
-   git clone https://github.com
+   git clone https://github.com/CCR898/estudio-mercado-ford-alicante.git
    cd estudio-mercado-ford-alicante
    ```
