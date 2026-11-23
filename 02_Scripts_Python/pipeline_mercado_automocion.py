@@ -1,19 +1,16 @@
-
 """
 Módulo Unificado de Inteligencia de Mercado - Sector Automoción (Alicante / Vega Baja)
-Actualizado a Google Places API (New)
+Extracción mediante Google Places API (New) y Visualización Geoespacial con Folium
 """
 
 import os
-import re
 import time
 import sqlite3
-from collections import Counter
 import requests
 import pandas as pd
 import folium
+from folium.plugins import MarkerCluster
 
-# 1. PEGA AQUÍ TU CLAVE DE API DE GOOGLE CLOUD (entre las comillas)
 API_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "TU_API_KEY_DE_GOOGLE_CLOUD")
 DB_NAME = "mercado_automocion_alicante.db"
 
@@ -37,7 +34,7 @@ MARCAS_CHINAS = {
 
 
 def ejecutar_censo_concesionarios():
-    url = "https://places.googleapis.com/v1/places:searchText"
+    url = "https://googleapis.com"
     headers = {
         "Content-Type": "application/json",
         "X-Goog-Api-Key": API_KEY,
@@ -51,11 +48,11 @@ def ejecutar_censo_concesionarios():
             consulta = f"Concesionario oficial {marca} en {zona}, Alicante"
             payload = {"textQuery": consulta, "languageCode": "es"}
             respuesta = requests.post(url, json=payload, headers=headers)
-            
+
             if respuesta.status_code != 200:
                 print(f"Aviso en {consulta}: {respuesta.text}")
                 continue
-                
+
             datos = respuesta.json()
             for p in datos.get("places", []):
                 pid = p.get("id")
@@ -82,28 +79,6 @@ def ejecutar_censo_concesionarios():
     print(f"✅ Censo completado: {len(df)} concesionarios guardados en {DB_NAME} y CSV.")
 
 
-
-
-"""
-Módulo Unificado de Inteligencia de Mercado - Sector Automoción (Alicante / Vega Baja)
-Versión optimizada con MarkerCluster para carga instantánea en navegador
-"""
-
-import os
-import sqlite3
-import pandas as pd
-import folium
-from folium.plugins import MarkerCluster
-
-API_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "TU_API_KEY_DE_GOOGLE_CLOUD")
-DB_NAME = "mercado_automocion_alicante.db"
-
-MARCAS_CHINAS = {
-    "MG", "BYD", "Omoda", "Jaecoo", "Chery", "EVO", "DR Automobiles",
-    "Ebro", "Leapmotor", "Lynk & Co", "XPeng", "DFSK", "SWM"
-}
-
-
 def generar_mapa_folium(lat_centro=37.9815, lon_centro=-0.7895, salida_html="04_Entregables_Visuales/mapa_concesionarios_alicante.html"):
     os.makedirs(os.path.dirname(salida_html), exist_ok=True)
     conn = sqlite3.connect(DB_NAME)
@@ -112,7 +87,6 @@ def generar_mapa_folium(lat_centro=37.9815, lon_centro=-0.7895, salida_html="04_
 
     mapa = folium.Map(location=[lat_centro, lon_centro], zoom_start=11, tiles=None)
     folium.TileLayer("Esri.WorldStreetMap", name="Mapa de Calles").add_to(mapa)
-
 
     folium.Circle(
         location=[lat_centro, lon_centro],
@@ -162,9 +136,5 @@ def generar_mapa_folium(lat_centro=37.9815, lon_centro=-0.7895, salida_html="04_
 
 
 if __name__ == "__main__":
+    # ejecutar_censo_concesionarios()
     generar_mapa_folium()
-
-
-    # Ya están activadas ambas funciones para ejecutarse al darle a Play:
-    #ejecutar_censo_concesionarios()
-    
