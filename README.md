@@ -28,7 +28,7 @@ Este proyecto combina investigación de mercado tradicional (informes **ANFAC**,
 ---
 
 ## 🗺️ Entregable Interactivo
-👉 **[[Explorar Mapa Interactivo de Concesionarios en Vivo (GitHub Pages)](https://ccr898.github.io/estudio-mercado-ford-alicante/04_Entregables_Visuales/mapa_concesionarios_alicante.html)](https://github.io)**  
+👉 **[[Explorar Mapa Interactivo de Concesionarios en Vivo (GitHub Pages)](https://ccr898.github.io/estudio-mercado-ford-alicante/04_Entregables_Visuales/mapa_concesionarios_alicante.html)](https://ccr898.github.io/estudio-mercado-ford-alicante/04_Entregables_Visuales/mapa_concesionarios_alicante.html)**  
 *(Sustituye `CCR898` por tu nombre de usuario de GitHub tras activar GitHub Pages).*
 
 ---
